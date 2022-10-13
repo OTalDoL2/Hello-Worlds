@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="app">
+            <!-- Manipulando uma variável -->
+            {{ message }}
+
+            <br> <!-- Count através de uma fuction -->
+            {{ messageCount }}
+            <button @click="count++">Aumentar 1</button>
+            <button @click="count--">Diminuir 1</button> <!-- Uma alternativa seria:  <button v-on:click></button> -->
+            
+            <br> <!-- V-Model  -->
+            <input v-model="goodMsg">
+            {{ goodMsg }}
+            
+            <br> <!-- Lista -->
+            <ul>
+                <li v-for="texto in colecao"> <!-- Ele pega a varíavel Texto e faz com que ela puxe os arquivos do Array todos-->
+                    {{texto.text}}
+                </li>
+            </ul>
+
+            <br> <!--input e button com function-->
+            <input v-model="myName" placeholder="Digite seu Nome">
+            <button @click="sayMessage()"> Colocar nome </button>
+            <p>{{goodM}}</p>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+        <script>
+            const app = new Vue({
+                el: "#app", //Elemento que receberá as modificações
+                data: {
+                    message: 'Hello, World!',
+                    goodMsg: '',
+                    count: 0,
+                    colecao: [
+                        {text: 'Café'},
+                        {text: 'Capuccino'},
+                        {text: 'Mochaccino'},
+                    ],
+                    goodM: ''
+                },
+                computed: { //propriedade reativa a outros componentes, geralmente vindos do data
+                    messageCount(){
+                        return `${this.message} ${this.count}`;
+                    },
+                },
+                methods: {
+                    sayMessage: function(){
+                        this.goodM = `Olá, ${this.myName}!`
+                    }
+                },
+            });
+        </script>
+    </body>
+</html>
